@@ -1,0 +1,9 @@
+{
+  "name": "ksb-ub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {"dev":"next dev","build":"next build","build:vercel":"prisma generate --schema prisma/postgres/schema.prisma && next build","start":"next start","lint":"eslint .","test":"vitest run","db:generate":"prisma generate","db:generate:postgres":"prisma generate --schema prisma/postgres/schema.prisma","db:migrate":"prisma migrate dev","db:migrate:deploy":"prisma migrate deploy --schema prisma/postgres/schema.prisma","db:seed":"prisma db seed","content:instagram":"tsx scripts/sync-instagram-content.ts","admin:create":"tsx scripts/create-admin.ts"},
+  "prisma": {"seed":"tsx prisma/seed.ts"},
+  "dependencies": {"@prisma/client":"^6.7.0","@supabase/supabase-js":"^2.57.0","bcryptjs":"^3.0.2","jose":"^6.0.10","lucide-react":"^0.511.0","next":"^15.3.2","react":"^19.1.0","react-dom":"^19.1.0","zod":"^3.24.3"},
+  "devDependencies": {"@eslint/eslintrc":"^3.3.1","@tailwindcss/postcss":"^4.1.7","@types/node":"^22","@types/react":"^19","@types/react-dom":"^19","eslint":"^9","eslint-config-next":"^15.3.2","prisma":"^6.7.0","tailwindcss":"^4.1.7","tsx":"^4.19.4","typescript":"^5.8.3","vitest":"^3.1.4"}
+}

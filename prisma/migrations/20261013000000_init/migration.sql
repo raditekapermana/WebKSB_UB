@@ -1,0 +1,12 @@
+CREATE TABLE "User" ("id" TEXT NOT NULL PRIMARY KEY,"email" TEXT NOT NULL,"name" TEXT NOT NULL,"passwordHash" TEXT NOT NULL,"createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,"updatedAt" DATETIME NOT NULL);
+CREATE TABLE "Category" ("id" TEXT NOT NULL PRIMARY KEY,"name" TEXT NOT NULL,"slug" TEXT NOT NULL);
+CREATE TABLE "Article" ("id" TEXT NOT NULL PRIMARY KEY,"title" TEXT NOT NULL,"slug" TEXT NOT NULL,"excerpt" TEXT NOT NULL,"content" TEXT NOT NULL,"coverImage" TEXT,"author" TEXT NOT NULL,"status" TEXT NOT NULL DEFAULT 'DRAFT',"publishedAt" DATETIME,"categoryId" TEXT,"createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,"updatedAt" DATETIME NOT NULL,CONSTRAINT "Article_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE SET NULL ON UPDATE CASCADE);
+CREATE TABLE "Event" ("id" TEXT NOT NULL PRIMARY KEY,"title" TEXT NOT NULL,"slug" TEXT NOT NULL,"description" TEXT NOT NULL,"location" TEXT,"image" TEXT,"registrationUrl" TEXT,"startsAt" DATETIME NOT NULL,"endsAt" DATETIME,"status" TEXT NOT NULL DEFAULT 'DRAFT',"createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,"updatedAt" DATETIME NOT NULL);
+CREATE TABLE "BoardMember" ("id" TEXT NOT NULL PRIMARY KEY,"name" TEXT NOT NULL,"role" TEXT NOT NULL,"division" TEXT NOT NULL,"bio" TEXT,"photo" TEXT,"sortOrder" INTEGER NOT NULL DEFAULT 0,"createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,"updatedAt" DATETIME NOT NULL);
+CREATE TABLE "GalleryImage" ("id" TEXT NOT NULL PRIMARY KEY,"title" TEXT NOT NULL,"description" TEXT,"category" TEXT,"imagePath" TEXT NOT NULL,"sortOrder" INTEGER NOT NULL DEFAULT 0,"createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE "OrganizationSetting" ("id" TEXT NOT NULL PRIMARY KEY DEFAULT 'main',"name" TEXT NOT NULL DEFAULT 'KSB UB',"shortDescription" TEXT NOT NULL DEFAULT 'Informasi organisasi sedang dilengkapi.',"profile" TEXT NOT NULL DEFAULT 'Profil organisasi sedang dilengkapi.',"history" TEXT NOT NULL DEFAULT 'Sejarah organisasi sedang dilengkapi.',"vision" TEXT NOT NULL DEFAULT 'Visi sedang dilengkapi.',"mission" TEXT NOT NULL DEFAULT 'Misi sedang dilengkapi.',"email" TEXT,"phone" TEXT,"address" TEXT,"instagram" TEXT,"logoPath" TEXT,"updatedAt" DATETIME NOT NULL);
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
+CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
+CREATE UNIQUE INDEX "Article_slug_key" ON "Article"("slug");
+CREATE UNIQUE INDEX "Event_slug_key" ON "Event"("slug");

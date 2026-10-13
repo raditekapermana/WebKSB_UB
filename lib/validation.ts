@@ -1,0 +1,3 @@
+import { z } from "zod";
+export const articleSchema = z.object({ title:z.string().min(4).max(160), slug:z.string().min(3).regex(/^[a-z0-9-]+$/), excerpt:z.string().min(10).max(300), content:z.string().min(20), author:z.string().min(2), categoryId:z.string().optional(), coverImage:z.string().url().optional().or(z.literal("")), status:z.enum(["DRAFT","PUBLISHED"]) });
+export const eventSchema = z.object({ title:z.string().min(4), slug:z.string().min(3).regex(/^[a-z0-9-]+$/), description:z.string().min(20), location:z.string().optional(), startsAt:z.string().min(10), registrationUrl:z.string().url().optional().or(z.literal("")), status:z.enum(["DRAFT","PUBLISHED"]) });

@@ -1,0 +1,1 @@
+import{db}from"@/lib/db";import{ArticleForm}from"../form";export const dynamic="force-dynamic";export default async function NewArticle(){return <section style={{paddingTop:35}}><h1>Artikel baru</h1><ArticleForm categories={await db.category.findMany({orderBy:{name:"asc"}})}/></section>}

@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+}
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  name String
+  passwordHash String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Category {
+  id String @id @default(cuid())
+  name String @unique
+  slug String @unique
+  articles Article[]
+}
+model Article {
+  id String @id @default(cuid())
+  title String
+  slug String @unique
+  excerpt String
+  content String
+  coverImage String?
+  author String
+  status ContentStatus @default(DRAFT)
+  publishedAt DateTime?
+  categoryId String?
+  category Category? @relation(fields:[categoryId],references:[id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Event {
+  id String @id @default(cuid())
+  title String
+  slug String @unique
+  description String
+  location String?
+  image String?
+  registrationUrl String?
+  startsAt DateTime
+  endsAt DateTime?
+  status ContentStatus @default(DRAFT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model BoardMember {
+  id String @id @default(cuid())
+  name String
+  role String
+  division String
+  bio String?
+  photo String?
+  sortOrder Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model GalleryImage {
+  id String @id @default(cuid())
+  title String
+  description String?
+  category String?
+  imagePath String
+  sortOrder Int @default(0)
+  createdAt DateTime @default(now())
+}
+model OrganizationSetting {
+  id String @id @default("main")
+  name String @default("KSB UB")
+  shortDescription String @default("Informasi organisasi sedang dilengkapi.")
+  profile String @default("Profil organisasi sedang dilengkapi.")
+  history String @default("Sejarah organisasi sedang dilengkapi.")
+  vision String @default("Visi sedang dilengkapi.")
+  mission String @default("Misi sedang dilengkapi.")
+  email String?
+  phone String?
+  address String?
+  instagram String?
+  logoPath String?
+  updatedAt DateTime @updatedAt
+}

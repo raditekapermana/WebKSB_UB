@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <main className="wrap" style={{paddingTop:80}}><p className="eyebrow">404</p><h1>Halaman tidak ditemukan</h1><p>Alamat yang Anda buka tidak tersedia atau kontennya belum dipublikasikan.</p><Link href="/" className="btn">Kembali ke beranda</Link></main>}
